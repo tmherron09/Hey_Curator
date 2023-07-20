@@ -1,0 +1,84 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+Table Relation {
+  relationship_owner_id integer
+  relationship_follower_id integer
+  orig_id integer
+  relationship_verb varchar
+  created_by varchar
+  created_at timestamp 
+}
+
+Table Person {
+  id integer [primary key]
+  first_name varchar
+  last_name varchar
+  username varchar
+  created_by varchar
+  created_at timestamp
+}
+
+Table Employee {
+  id integer [primary key]
+  fulltime bool
+  employment_start_date timestamp
+  employment_end_date timestamp
+  created_by varchar
+  created_at timestamp
+}
+
+Table Role {
+  id integer [primary key]
+  role_name varchar
+  created_by varchar
+  created_at timestamp
+}
+
+Table Curator_Role {
+  id integer [primary key]
+  curator_role_name varchar
+  created_by varchar
+  created_at timestamp
+}
+
+Table Title {
+  id integer
+  title varchar
+  created_by varchar
+  created_at timestamp
+}
+
+Table posts {
+  id integer [primary key]
+  title varchar
+  body text [note: 'Content of the post']
+  user_id integer
+  status varchar
+  created_at timestamp
+}
+
+Ref: Relation.relationship_owner_id <> Person.id// many-to-one
+
+Ref: Relation.relationship_follower_id > Employee.id
+
+Ref: Relation.relationship_follower_id <> Title.id
+
+
+Ref: Relation.relationship_owner_id <> Employee.id
+Ref: Relation.relationship_follower_id <> Role.id
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
